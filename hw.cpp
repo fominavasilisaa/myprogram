@@ -1,6 +1,18 @@
 #include <iostream>
+
 using namespace std;
-int main(){
-	cout << "hello world' << endl;
-	return 0;
-}
+
+struct Point {
+	double x = 0;
+	double y = 0;
+
+	void setpoint(double X, double Y) {
+		x = X;
+		y = Y;
+	}
+
+	void pointPrint() {
+		cout << "x: " << x << endl;
+		cout << "y: " << y << endl;
+	}
+};

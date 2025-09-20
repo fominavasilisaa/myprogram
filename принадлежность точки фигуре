@@ -65,7 +65,7 @@ int main() {
 	Circle c;
 	Square s;
 
-	cout << "Точка: " << endl;
+	cout << "Точка: ";
 	readPoint(p);
 	cout << "Круг: " << endl;
 	readCircle(c);

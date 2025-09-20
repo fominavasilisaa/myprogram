@@ -1,0 +1,53 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+using namespace std;
+
+struct Circle {
+	double x, y;
+	int rad;
+
+	void centerPoint() {
+		cout << "Введите координату x центра: ";
+		cin >> x;
+		cout << "Введите координату y центра: ";
+		cin >> y;
+	}
+
+	void radius() {
+		cout << "Введите радиус окружности: ";
+		cin >> rad;
+	}
+
+	void printCircle() {
+		cout << "х центра: " << x << endl;
+		cout << "у центра: " << y << endl;
+		cout << "радиус: " << rad << endl;
+	}
+
+	void lenCircle() {
+		double pi = 3.14;
+		cout << fixed << setprecision(1);
+		cout << "Длина окружности = " << 2 * rad * pi << endl;
+	}
+
+	void squareCircle() {
+		double pi = 3.14;
+		cout << fixed << setprecision(1);
+		cout << "Площадь круга = " << pi * pow(rad, 2) << endl;
+	}
+};
+
+int main() {
+	Circle circle;
+
+	circle.centerPoint();
+	circle.radius();
+
+	circle.printCircle();
+	circle.lenCircle();
+	circle.squareCircle();
+
+	return 0;
+}

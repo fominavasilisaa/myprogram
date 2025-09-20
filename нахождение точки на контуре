@@ -1,0 +1,83 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+struct Point {
+	double x;
+	double y;
+};
+
+struct Circle {
+	Point center;
+	int rad;
+};
+
+struct Square {
+	Point leftPoint;
+	int len;
+};
+
+void pointInCircle(Point point, Circle circle) {
+	double lengh = sqrt(pow(point.x - circle.center.x, 2) + pow(point.y - circle.center.y, 2));
+	if (lengh == circle.rad) {
+		cout << "точка находится на границе круга!" << endl;
+	}
+	else {
+		cout << "точка не находится на границе круга!" << endl;
+	}
+}
+
+void pointInSquare(Point point, Square square) {
+	double rightPoint = square.leftPoint.x + square.len;
+	double downPoint = square.leftPoint.y - square.len;
+
+	if (((point.y == downPoint) && ((point.x >= square.leftPoint.x) && (point.x <= rightPoint))) ||
+		((point.y == square.leftPoint.y) && ((point.x >= square.leftPoint.x) && (point.x <= rightPoint))) ||
+		((point.x == downPoint) && ((point.y >= downPoint) && (point.y <= square.leftPoint.y))) ||
+		((point.x == rightPoint) && ((point.y >= downPoint) && (point.y <= square.leftPoint.y)))) {
+		cout << "точка находится на границе квадрата!" << endl;
+	}
+	else {
+		cout << "точка не находится на границе квадрата!" << endl;
+	}
+}
+
+void readPoint(Point &p) {
+	cout << "	а) введите х: ";
+	cin >> p.x;
+	cout << "	b) введите у: ";
+	cin >> p.y;
+}
+
+void readCircle(Circle &c) {
+	cout << "1) введите центр круга: " << endl;
+	readPoint(c.center);
+	cout << "2) введите радиус круга: ";
+	cin >> c.rad;
+}
+
+void readSquare(Square &s) {
+	cout << "1) введите левый верхний угол квадрата: " << endl;
+	readPoint(s.leftPoint);
+	cout << "2) введите длину стороны квадрата: ";
+	cin >> s.len;
+}
+
+int main() {
+	Point p;
+	Circle c;
+	Square s;
+
+	cout << "Точка: ";
+	readPoint(p);
+	cout << "Круг: " << endl;
+	readCircle(c);
+	cout << "Квадрат: " << endl;
+	readSquare(s);
+
+	pointInCircle(p, c);
+	pointInSquare(p, s);
+
+	return 0;
+}

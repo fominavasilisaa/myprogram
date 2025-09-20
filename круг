@@ -4,25 +4,29 @@
 
 using namespace std;
 
+struct Point{
+	double x;
+	double y;
+};
 struct Circle {
-	double x, y;
+	Point center;
 	int rad;
 
 	void centerPoint() {
 		cout << "Введите координату x центра: ";
-		cin >> x;
+		cin >> center.x;
 		cout << "Введите координату y центра: ";
-		cin >> y;
+		cin >> center.y;
 	}
 
-	void radius() {
+	void radiusCircle() {
 		cout << "Введите радиус окружности: ";
 		cin >> rad;
 	}
 
 	void printCircle() {
-		cout << "х центра: " << x << endl;
-		cout << "у центра: " << y << endl;
+		cout << "х центра: " << center.x << endl;
+		cout << "у центра: " << center.y << endl;
 		cout << "радиус: " << rad << endl;
 	}
 
@@ -43,7 +47,7 @@ int main() {
 	Circle circle;
 
 	circle.centerPoint();
-	circle.radius();
+	circle.radiusCircle();
 
 	circle.printCircle();
 	circle.lenCircle();

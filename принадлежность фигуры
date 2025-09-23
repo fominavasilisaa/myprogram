@@ -1,0 +1,145 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+struct Point {
+	double x;
+	double y;
+};
+
+struct Circle {
+	Point center;
+	int rad;
+};
+
+struct Square {
+	Point leftPoint;
+	int len;
+};
+
+void circleInCircle(Circle circle1, Circle circle2) {
+    double lenght = sqrt(pow(circle1.center.x - circle2.center.x, 2) +
+        pow(circle1.center.y - circle2.center.y, 2));
+
+    if (lenght + circle1.rad <= circle2.rad) {
+        cout << "Первый круг внутри второго" << endl;
+    }
+    else {
+        cout << "Первый круг не внутри второго" << endl;
+    }
+}
+
+void squareInSquare(Square square1, Square square2) {
+    int leftSide1 = square1.leftPoint.x;
+    int rightSide1 = square1.leftPoint.x + square1.len;
+    int upSide1 = square1.leftPoint.y;
+    int downSide1 = square1.leftPoint.y - square1.len;
+
+    int leftSide2 = square2.leftPoint.x;
+    int rightSide2 = square2.leftPoint.x + square2.len;
+    int upSide2 = square2.leftPoint.y;
+    int downSide2 = square2.leftPoint.y - square2.len;
+
+    if (leftSide1 >= leftSide2 && rightSide1 <= rightSide2 &&
+        upSide1 <= upSide2 && downSide1 >= downSide2) {
+        cout << "Первый квадрат внутри второго" << endl;
+    }
+    else {
+        cout << "Первый квадрат не внутри второго" << endl;
+    }
+}
+
+void squareInCircle(Square square, Circle circle) {
+    int leftSide = square.leftPoint.x;
+    int rightSide = square.leftPoint.x + square.len;
+    int upSide = square.leftPoint.y;
+    int downSide = square.leftPoint.y - square.len;
+
+    double lenght1 = sqrt(pow(leftSide - circle.center.x, 2) +
+        pow(upSide - circle.center.y, 2));
+    double lenght2 = sqrt(pow(rightSide - circle.center.x, 2) +
+        pow(upSide - circle.center.y, 2));
+    double lenght3 = sqrt(pow(leftSide - circle.center.x, 2) +
+        pow(downSide - circle.center.y, 2));
+    double lenght4 = sqrt(pow(rightSide - circle.center.x, 2) +
+        pow(downSide - circle.center.y, 2));
+
+    if (lenght1 <= circle.rad && lenght2 <= circle.rad &&
+        lenght3 <= circle.rad && lenght4 <= circle.rad) {
+        cout << "Квадрат внутри круга" << endl;
+    }
+    else {
+        cout << "Квадрат не внутри круга" << endl;
+    }
+}
+
+void circleInSquare(Circle circle, Square square) {
+    int leftSide = square.leftPoint.x;
+    int rightSide = square.leftPoint.x + square.len;
+    int upSide = square.leftPoint.y;
+    int downSide = square.leftPoint.y - square.len;
+
+    if (circle.center.x - circle.rad >= leftSide &&
+        circle.center.x + circle.rad <= rightSide &&
+        circle.center.y + circle.rad <= upSide &&
+        circle.center.y - circle.rad >= downSide) {
+        cout << "Круг внутри квадрата" << endl;
+    }
+    else {
+        cout << "Круг не внутри квадрата" << endl;
+    }
+}
+
+void readPoint(Point& point) {
+    cout << "       Введите x: ";
+    cin >> point.x;
+    cout << "       Введите y: ";
+    cin >> point.y;
+}
+
+void readCircle(Circle& circle) {
+    cout << "   Введите центр круга: " << endl;
+    readPoint(circle.center);
+    cout << "   Введите радиус круга: ";
+    cin >> circle.rad;
+}
+
+void readSquare(Square& square) {
+    cout << "   Введите левый верхний угол квадрата: " << endl;
+    readPoint(square.leftPoint);
+    cout << "   Введите длину стороны квадрата: ";
+    cin >> square.len;
+}
+
+int main() {
+    Circle circle1, circle2;
+    Square square1, square2;
+
+    cout << "Круг 1: " << endl;
+    readCircle(circle1);
+
+    cout << "Круг 2: " << endl;
+    readCircle(circle2);
+
+    cout << "Квадрат 1: " << endl;
+    readSquare(square1);
+
+    cout << "Квадрат 2: " << endl;
+    readSquare(square2);
+
+    circleInCircle(circle1, circle2);
+    circleInCircle(circle2, circle1);
+    squareInSquare(square1, square2); 
+    squareInSquare(square2, square1);
+    squareInCircle(square1, circle1);
+    squareInCircle(square1, circle2);
+    squareInCircle(square2, circle1);
+    squareInCircle(square2, circle2);
+    circleInSquare(circle1, square1);
+    circleInSquare(circle1, square2);
+    circleInSquare(circle2, square1);
+    circleInSquare(circle2, square2);
+
+    return 0;
+}
